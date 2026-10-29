@@ -1,0 +1,21 @@
+@startuml
+top to bottom direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ArrowColor #6A7B90
+skinparam rectangle {
+  RoundCorner 20
+}
+title 2. Нарушение баланса у корня - False
+caption Номера показывают порядок возврата из рекурсивных вызовов.
+rectangle "1\nшаг 3\nвозврат -1" as n0 #FDE9E7
+rectangle "2\nшаг 2\nh = 2" as n1 #E5F4EB
+rectangle "3\nшаг 1\nh = 1" as n2 #E5F4EB
+n0 -down-> n1 : L
+n1 -down-> n2 : L
+legend bottom
+3 возвращает 1, затем 2 возвращает 2.
+У корня слева высота 2, справа - 0: |2 - 0| = 2.
+Корень возвращает -1. Итог: False.
+endlegend
+@enduml

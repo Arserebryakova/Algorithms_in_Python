@@ -1,0 +1,27 @@
+@startuml
+top to bottom direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ArrowColor #6A7B90
+skinparam rectangle {
+  RoundCorner 20
+}
+title 3. Нарушение внутри поддерева - False
+caption Красным отмечен возврат -1, серым - узлы, до которых проверка не доходит.
+rectangle "1\nшаг 4\nвозврат -1" as n0 #FDE9E7
+rectangle "2\nшаг 3\nвозврат -1" as n1 #FDE9E7
+rectangle "3\nпропускаем" as n2 #F1F2F4
+rectangle "4\nшаг 2\nh = 2" as n3 #E5F4EB
+rectangle "6\nпропускаем" as n4 #F1F2F4
+rectangle "5\nшаг 1\nh = 1" as n5 #E5F4EB
+n0 -down-> n1 : L
+n0 -down-> n2 : R
+n1 -down-> n3 : L
+n2 -down-> n4 : R
+n3 -down-> n5 : L
+legend bottom
+5 возвращает 1, узел 4 - высоту 2.
+У узла 2: |2 - 0| = 2. Он возвращает -1.
+Корень тоже возвращает -1, правое поддерево не проверяем.
+endlegend
+@enduml
